@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My Book List</title>
+  <th:block th:replace="layout:: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout:: header"></th:block>
+<div class="container">
+  <h1 >Chỉnh Sửa Sách </h1>
+  <form th:action="@{/books/edit/{id}(id=${book.id})}" th:object="${book}" method="post">
+
+    <input type="hidden"th:field="*{id}">
+    <div class="col-6 mb-3">
+      <label class="form-label" >Id</label>
+      <input  class="form-control" type="text" th:field="*{id}" id="idd">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" >Title</label>
+      <input  class="form-control" type="text" th:field="*{title}" id="Title">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" >Author</label>
+      <input  class="form-control" type="text" th:field="*{author}" id="author">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" >Price</label>
+      <input  class="form-control" type="text" th:field="*{price}" id="price">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" >Category</label>
+      <select class="form-control" id="category" name="category">
+
+        <option th:each="category : ${categories}" th:value="${category.id}"
+                th:text="${category.name}">
+        </option>
+      </select>
+    </div>
+    <input type="submit" class="btn btn-primary" th:value="save">
+  </form>
+  <br>
+  <a th:href="@{/books}">BackToList</a>
+</div>
+<th:block ></th:block>
+</body>
+</html>
